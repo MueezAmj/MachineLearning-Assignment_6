@@ -1,14 +1,19 @@
 import streamlit as st
 import pickle
 import pandas as pd
+import os
 
 # Load models
 def load_model(filename):
     with open(filename, "rb") as f:
         return pickle.load(f)
 
-log_reg_model = load_model("log_reg_model.pkl")
-svm_model = load_model("svm_model.pkl")
+# Ensure the model files are in the same directory as the Streamlit app
+log_reg_model_path = os.path.join(os.path.dirname(__file__), "log_reg_model.pkl")
+svm_model_path = os.path.join(os.path.dirname(__file__), "svm_model.pkl")
+
+log_reg_model = load_model(log_reg_model_path)
+svm_model = load_model(svm_model_path)
 
 # Get feature names
 def get_feature_names():
